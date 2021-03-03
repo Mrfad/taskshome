@@ -1,0 +1,105 @@
+{% extends 'tasks/partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+.middle {
+    text-align: center;
+    vertical-align: middle;
+}
+</style>
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-lg">
+        <br>
+        <div  class="table-responsive">
+            <table id="t_id" class="table table-sm table-striped table-bordered table-hover responsive nowrap" style="width:100">
+                <thead>
+                    <tr>
+                     <th class="th-sm numeric-sort">Num</th>
+                     <th class="th-sm">Supplier Name</th>
+                     <th class="th-sm">Phone</th>
+                     <th class="th-sm">Address</th>
+                     <th class="th-sm">Email</th>
+                     <th class="th-sm">Website</th>
+                     <th class="th-sm">Date of creation</th>
+                     <th class="th-sm">Modification Date</th>
+                     <th class="th-sm middle">Update</th>
+                     <th class="th-sm middle">Delete</th>
+                     <th class="th-sm middle">View</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                    {% if suppliers %}            
+                        {% for supplier in suppliers %}
+                        <tr>
+                            <td class="break">{{ supplier.id }}</td>
+                            <td class="break"><a href="{% url 'supplierdetail' supplier.id %}">{{supplier.supplier_name}}</td>
+                            <td class="break">{{supplier.supplier_phone}}</td>
+                            <td >{{supplier.supplier_address}}</td>
+                            <td >{{supplier.email}}</td>
+                            <td >{{supplier.website}}</td>
+                            <td >{{supplier.creation_date}}</td>
+                            <td >{{supplier.modified_date}}</td>
+
+                            <td class="middle">
+                                <button type="button" class="btn">
+                                    <i class="fas fa-edit" style="color:#f0ad4e;" href="{% url 'updatesupplier' supplier.id %}"></i>
+                                </button>
+                            </td>
+
+                            <td class="middle">
+                                <button type="button" class="btn">
+                                    <i class="fas fa-trash-alt" style="color:#d9534f;" href="{% url 'updatesupplier' supplier.id %}"></i>
+                                </button>
+                            </td>
+
+                            <td class="middle">
+                                <button type="button" class="btn">
+                                    <i class="fas fa-eye" style="color:#0275d8;" href="{% url 'supplierdetail' supplier.id %}"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                   {% endif %}
+                 </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+{% block js %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/css/datatables.min1.css' %}">
+<script type="text/javascript" src="{% static 'users/js/dataTables.min1.js' %}"></script>
+
+    <script>
+        $(document).ready( function () {
+        $('#t_id').DataTable({
+            "pageLength": 50,
+            "columnDefs": [
+{ "orderable": false, "targets": 8 },
+{ "orderable": false, "targets": 9 },
+{ "orderable": false, "targets": 10 },
+],
+
+        dom: 'B<"clear">lfrtip',
+        buttons: {
+            name: 'primary',
+            buttons: ['copy', 'csv', 'print' ]
+    
+            }}
+        );
+    } );
+    </script>
+{% endblock js %}     
+   
+
+
+
+   
+   
+
+

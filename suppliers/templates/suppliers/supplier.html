@@ -1,0 +1,225 @@
+{% extends 'tasks/partials/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block content %}
+
+<div class="container supplier-container">
+    {% for info in supplier %}
+    <div class="row">
+        <div class='col-md'>
+            <div class='card'>
+                <div class='card-header text-white bg-info'>
+                    <div class='card-title text-center'>
+                        {{info.supplier_name}}
+                    </div>
+                </div>
+            </div>
+            <div class='card-body'>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>ID</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{info.id}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{info.supplier_name}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{info.email}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Phone</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{info.supplier_phone}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>address</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{info.supplier_address}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Website</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{info.website}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Additional Notes</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{info.notes}}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <a href="" data-toggle="modal" class="btn btn-outline-warning" data-target="#modelsaddcontact">Add Contact Person</a>
+                    <div class="modal fade" tabindex="-1"  id="modelsaddcontact">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Contact Name</h5>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="content-section">
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            <fieldset class="form-group">
+                                                {{form1|crispy}}
+                                            </fieldset>
+                                            <div class="form-group">
+                                                <button class="btn btn-outline-info" type="submit">Save Contact</button>
+                                                <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
+                                            </div>   
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    {% endfor %}
+</div>
+
+
+
+{% if contact_person %}
+<div class="container">   
+    <div class="row">
+        <div class="col-md">
+            <div class='card bg-light'>
+                <ul class='nav nav-tabs card-header-tabs'>
+                    {% for person in contact_person %}
+                        <li class='nav-item'>
+                            <a class='nav-link bg-info' href='#'>{{person.contact_name}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                    <div class="row">
+                        <div class="col-md">
+                            <p>contact Name</p>
+                        </div>
+                        <div class="col-md">
+                            <p>{{person.contact_name}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <p>Mobile Phone</p>
+                        </div>
+                        <div class="col-md">
+                            <p>{{person.contact_mobile}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <p>E-mail</p>
+                        </div>
+                        <div class="col-md">
+                            <p>{{person.email}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <p>Job Title</p>
+                        </div>
+                        <div class="col-md">
+                            <p>{{person.job_title}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <p>Notes</p>
+                        </div>
+                        <div class="col-md">
+                            <p>{{person.description}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="" data-toggle="modal" class="btn btn-outline-warning" data-target="#modelsaddcontact">Update</a>
+                        <div class="modal fade" tabindex="-1"  id="modelsaddcontact">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Update Contact</h5>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="content-section">
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                <fieldset class="form-group">
+                                                    {{form1|crispy}}
+                                                </fieldset>
+                                                <div class="form-group">
+                                                    <button class="btn btn-outline-info" type="submit">Update</button>
+                                                    <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
+                                                </div>   
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="col-md-6">
+                    <a href="" data-toggle="modal" class="btn btn-outline-warning" data-target="#modelsaddcontact">Delete</a>
+                    <div class="modal fade" tabindex="-1"  id="modelsaddcontact">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete Contact</h5>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="content-section">
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            <fieldset class="form-group">
+                                                {{form1|crispy}}
+                                            </fieldset>
+                                            <div class="form-group">
+                                                <button class="btn btn-outline-info" type="submit">Delete</button>
+                                                <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
+                                            </div>   
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

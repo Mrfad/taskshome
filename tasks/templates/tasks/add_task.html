@@ -1,0 +1,72 @@
+{% extends 'tasks/partials/base.html' %}
+<!-- {% load crispy_forms_tags %} -->
+{% load widget_tweaks %}
+{% block content %}
+<div class='container'>
+    <div class="content-section emp-profile">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Add Task</legend>
+                <div class="mb-3">
+                    {% render_field form.task_name class="form-control" placeholder="Task Name" %}
+                    </div>
+                    <div class="mb-3">
+                        <label>Task Progress</label>
+                        {% render_field form.task_progress class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        <label>Task priority</label>
+                        {% render_field form.task_priority class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        <label>Assigned To</label>
+                        {% render_field form.assigned_to class="form-control" %}
+                    </div>
+                    <div class="mb-3 form-check">
+                        {% render_field form.paid class="form-check-input" %}
+                        <label class="form-check-label">Paid</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        {% render_field form.on_account class="form-check-input" %}
+                        <label class="form-check-label">On Account</label>
+                    </div>
+                    <div class="mb-3">
+                        <label>Net Amount</label>
+                        {% render_field form.net_amount class="form-control" %}
+                    </div>
+                    <div class="mb-3 form-check">
+                        {% render_field form.delivered class="form-check-input" %}
+                        <label class="form-check-label">Delivered</label>
+                    </div>
+                    <div class="mb-3">
+                        <label>Delivered Date</label>
+                        {% render_field form.delivered_date class="form-control" type="datetime-local" %}
+                    </div>
+                    <div class="mb-3">
+                        <label>Due Date</label>
+                        {% render_field form.due_date class="form-control" type="datetime-local" %}
+                    </div>
+                    <div class="mb-3">
+                        <label>Project Name</label>
+                        {% render_field form.project class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        <label>Upload a File</label>
+                        {% render_field form.file_name class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Other Notes</label>
+                    {% render_field form.notes class="form-control" %}
+                    </div>   
+                    
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Save Contact</button>
+                    </div>
+                </div> 
+            </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock content %}

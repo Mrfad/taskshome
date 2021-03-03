@@ -1,0 +1,37 @@
+{% extends 'tasks/partials/base.html' %}
+<!-- {% load crispy_forms_tags %} -->
+{% load widget_tweaks %}
+{% block content %}
+    <div class="content-section emp-profile">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Add Supplier</legend>
+                <div class="mb-3">
+                    {% render_field form.supplier_name class="form-control" placeholder="Supplier Name" %}
+                  </div>
+                  <div class="mb-3">
+                    {% render_field form.supplier_phone class="form-control" placeholder="Phone Number"%}
+                  </div>
+                  <div class="mb-3">
+                    {% render_field form.supplier_address class="form-control" placeholder="Address" %}
+                  </div>
+                  <div class="mb-3">
+                    {% render_field form.email class="form-control" placeholder="Email" %}
+                  </div>
+                  <div class="mb-3">
+                    {% render_field form.website class="form-control" placeholder="Website" %}
+                  </div>
+                  <div class="mb-3">
+                    {% render_field form.notes class="form-control" %}
+                  </div>
+                 
+            </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Save Contact</button>
+                </div>   
+        </form>
+        
+
+    </div>
+{% endblock content %}
